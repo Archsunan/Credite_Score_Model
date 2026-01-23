@@ -1,3 +1,4 @@
+
 # 🏦 Credit Score Model
 
 An AI-powered credit scoring system that predicts creditworthiness using machine learning. Built with XGBoost, Flask, and a modern web interface.
@@ -20,9 +21,13 @@ pip install -r requirements.txt
 
 ### 2. Train the Model
 ```bash
-python src/train_model.py
+# Train on German Credit Dataset (Default)
+python src/train_model_german.py
+
+# Optional: Train on Synthetic Data
+python src/train_model_german.py --dataset synthetic
 ```
-This generates 10,000 synthetic credit records, trains the model, and saves:
+This trains the model and saves:
 - `models/credit_model.pkl` - Trained model
 - `models/preprocessor.pkl` - Data preprocessor
 - `models/feature_importance.png` - Feature importance visualization
@@ -49,7 +54,8 @@ Open `web/index.html` in your browser or visit the local file path.
 credit_score/
 ├── src/
 │   ├── data_preprocessing.py  # Data cleaning and feature engineering
-│   ├── train_model.py         # Model training pipeline
+│   ├── train_model_german.py  # Main training pipeline (German & Synthetic)
+│   ├── load_german_credit.py  # German Credit dataset loader
 │   ├── model.py               # Model class and prediction logic
 │   └── api.py                 # Flask API server
 ├── web/
@@ -162,6 +168,18 @@ This is a **demonstration project** for educational purposes. The model uses syn
 - Extensive validation with real data
 - Bias and fairness testing
 - Professional financial analysis
+
+## 🧪 Testing
+
+### Test Model Predictions
+```bash
+python test_model.py
+```
+
+### Test All Categories via API
+```bash
+python test_api_all_categories.py
+```
 
 ## 📝 License
 

@@ -3,7 +3,7 @@ const API_URL = 'http://localhost:5000';
 // Form submission handler
 document.getElementById('creditForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    
+
     // Collect form data
     const formData = {
         age: parseFloat(document.getElementById('age').value),
@@ -17,10 +17,10 @@ document.getElementById('creditForm').addEventListener('submit', async (e) => {
         num_delinquencies: parseFloat(document.getElementById('num_delinquencies').value),
         num_inquiries: parseFloat(document.getElementById('num_inquiries').value)
     };
-    
+
     // Show loading overlay
     document.getElementById('loadingOverlay').classList.add('active');
-    
+
     try {
         // Make API request
         const response = await fetch(`${API_URL}/predict`, {
@@ -30,16 +30,16 @@ document.getElementById('creditForm').addEventListener('submit', async (e) => {
             },
             body: JSON.stringify(formData)
         });
-        
+
         if (!response.ok) {
             throw new Error(`API error: ${response.statusText}`);
         }
-        
+
         const result = await response.json();
-        
+
         // Display results
         displayResults(result);
-        
+
     } catch (error) {
         console.error('Error:', error);
         alert(`Error calculating credit score: ${error.message}\n\nMake sure the API server is running:\npython src/api.py`);
@@ -51,36 +51,55 @@ document.getElementById('creditForm').addEventListener('submit', async (e) => {
 
 function displayResults(result) {
     const resultSection = document.getElementById('resultSection');
-    const scoreBadge = document.getElementById('scoreBadge');
     const scoreValue = document.getElementById('scoreValue');
     const riskLevel = document.getElementById('riskLevel');
     const confidence = document.getElementById('confidence');
     const probabilityBars = document.getElementById('probabilityBars');
-    
-    // Update credit score
+    const circle = document.getElementById('progressRing');
+    const scoreCircle = document.getElementById('scoreCircle');
+
+    // Define Colors and Offsets
+    // Radius = 90, Circumference = 2 * PI * 90 ≈ 565.48
+    const circumference = 565.48;
+    const colors = {
+        'Excellent': '#10b981', // green
+        'Good': '#5383d0ff',      // blue
+        'Fair': '#f59e0b',      // amber
+        'Poor': '#ef4444'       // red
+    };
+
+    const color = colors[result.credit_score] || '#ffffff';
+
+    // Update Text Data
     scoreValue.textContent = result.credit_score;
-    
-    // Update badge color based on score
-    scoreBadge.className = 'credit-score-badge ' + result.credit_score.toLowerCase();
-    
-    // Update risk level and confidence
+
+    // Update score circle background color
+    if (scoreCircle) {
+        scoreCircle.style.background = `radial-gradient(circle at center, ${color}20, transparent)`;
+        scoreCircle.style.borderColor = color;
+    }
+
     riskLevel.textContent = result.risk_level;
+
     confidence.textContent = `${(result.probability * 100).toFixed(1)}%`;
-    
+
+    // Update Circle Animation
+    const offset = circumference - (result.probability * circumference);
+    circle.style.strokeDashoffset = offset;
+    circle.style.stroke = color;
+
     // Create probability bars
     probabilityBars.innerHTML = '';
     const categories = ['Excellent', 'Good', 'Fair', 'Poor'];
-    const colors = {
-        'Excellent': 'linear-gradient(90deg, #11998e 0%, #38ef7d 100%)',
-        'Good': 'linear-gradient(90deg, #667eea 0%, #764ba2 100%)',
-        'Fair': 'linear-gradient(90deg, #f093fb 0%, #f5576c 100%)',
-        'Poor': 'linear-gradient(90deg, #eb3349 0%, #f45c43 100%)'
-    };
-    
+
+    // Find max probability to scale bars relative to each other if wanted, 
+    // but standard percentage width is usually better for clarity.
+
     categories.forEach(category => {
         const probability = result.all_probabilities[category] || 0;
         const percentage = (probability * 100).toFixed(1);
-        
+        const barColor = colors[category];
+
         const barHtml = `
             <div class="probability-bar">
                 <div class="probability-label">
@@ -88,19 +107,21 @@ function displayResults(result) {
                     <span>${percentage}%</span>
                 </div>
                 <div class="bar-container">
-                    <div class="bar-fill" style="width: ${percentage}%; background: ${colors[category]};"></div>
+                    <div class="bar-fill" style="width: ${percentage}%; background-color: ${barColor}; box-shadow: 0 0 10px ${barColor}80;"></div>
                 </div>
             </div>
         `;
-        
+
         probabilityBars.innerHTML += barHtml;
     });
-    
-    // Show result section
-    resultSection.style.display = 'block';
-    
-    // Scroll to results
-    resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+    // Show result section with flex (removed display:none)
+    resultSection.classList.remove('hidden');
+
+    // Scroll to results on mobile
+    if (window.innerWidth < 1024) {
+        resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
 }
 
 // Check API health on page load
@@ -108,7 +129,7 @@ window.addEventListener('load', async () => {
     try {
         const response = await fetch(`${API_URL}/health`);
         const health = await response.json();
-        
+
         if (!health.model_loaded) {
             console.warn('Model not loaded on the server');
         }
@@ -116,3 +137,5 @@ window.addEventListener('load', async () => {
         console.warn('Could not connect to API server. Make sure to run: python src/api.py');
     }
 });
+
+

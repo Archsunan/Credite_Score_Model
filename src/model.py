@@ -11,13 +11,19 @@ class CreditScoreModel:
     
     def __init__(self):
         self.model = XGBClassifier(
-            n_estimators=200,
-            max_depth=6,
-            learning_rate=0.1,
-            subsample=0.8,
-            colsample_bytree=0.8,
+            n_estimators=500,
+            max_depth=7,
+            learning_rate=0.03,
+            subsample=0.85,
+            colsample_bytree=0.85,
+            min_child_weight=3,
+            gamma=0.2,
+            reg_alpha=0.05,
+            reg_lambda=1.5,
             random_state=42,
-            eval_metric='mlogloss'
+            eval_metric='mlogloss',
+            tree_method='hist',
+            scale_pos_weight=1
         )
         self.label_encoder = LabelEncoder()
         self.classes = ['Excellent', 'Good', 'Fair', 'Poor']

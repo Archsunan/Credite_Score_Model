@@ -43,7 +43,7 @@ def main():
     # Step 1: Generate synthetic data
     print("\n[1/6] Generating synthetic data...")
     preprocessor = DataPreprocessor()
-    data = preprocessor.generate_synthetic_data(n_samples=10000)
+    data = preprocessor.generate_synthetic_data(n_samples=50000)
     print(f"Generated {len(data)} samples")
     print(f"Class distribution:\n{data['credit_score'].value_counts()}")
     

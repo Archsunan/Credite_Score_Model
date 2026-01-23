@@ -1,11 +1,13 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import joblib
 import os
 import pandas as pd
 
-app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend access
+# Initialize Flask app serving static files from the 'web' directory
+WEB_FOLDER = os.path.abspath(os.path.join(os.path.dirname(__file__), '../web'))
+app = Flask(__name__, static_folder=WEB_FOLDER, static_url_path='')
+CORS(app)
 
 # Load model and preprocessor
 model = None
@@ -57,7 +59,7 @@ def predict():
         "credit_history_length": 10,
         "num_credit_lines": 4,
         "debt_to_income": 0.35,
-        "num_delinquencies": 0,
+        "num_delinquencies": 0,    
         "num_inquiries": 1
     }
     """
@@ -117,6 +119,18 @@ def feature_importance():
         return jsonify({
             'error': str(e)
         }), 500
+
+# Static file serving routes (must be last to not override API routes)
+@app.route('/')
+def index():
+    return send_from_directory(app.static_folder, 'index.html')
+
+@app.route('/<path:path>')
+def serve_static(path):
+    # Avoid serving API routes as static files
+    if path in ['health', 'predict', 'feature_importance']:
+        return jsonify({'error': 'Not found'}), 404
+    return send_from_directory(app.static_folder, path)
 
 if __name__ == '__main__':
     print("Loading model artifacts...")
