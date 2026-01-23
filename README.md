@@ -115,7 +115,6 @@ GET http://localhost:5000/feature_importance
 ```
 Returns the importance scores of all features used in the model.
 
-## 📝 Input Features
 
 The model uses **10 core features** with automatic feature engineering:
 
