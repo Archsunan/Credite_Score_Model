@@ -118,10 +118,8 @@ function displayResults(result) {
     // Show result section with flex (removed display:none)
     resultSection.classList.remove('hidden');
 
-    // Scroll to results on mobile
-    if (window.innerWidth < 1024) {
-        resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    // Scroll to results
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Check API health on page load

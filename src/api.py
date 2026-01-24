@@ -13,25 +13,34 @@ CORS(app)
 model = None
 preprocessor = None
 
+REQUIRED_FIELDS = [
+    'age', 'income', 'employment_length', 'loan_amount',
+    'loan_term', 'credit_history_length', 'num_credit_lines',
+    'debt_to_income', 'num_delinquencies', 'num_inquiries'
+]
+
+
 def load_artifacts():
     """Load trained model and preprocessor."""
     global model, preprocessor
-    
+
     model_path = 'models/credit_model.pkl'
     preprocessor_path = 'models/preprocessor.pkl'
-    
+
+    train_hint = "python src/train_model_german.py --dataset synthetic"
+
     if not os.path.exists(model_path):
         raise FileNotFoundError(
             f"Model not found at {model_path}. "
-            "Please train the model first by running: python src/train_model.py"
+            f"Please train the model first by running: {train_hint}"
         )
-    
+
     if not os.path.exists(preprocessor_path):
         raise FileNotFoundError(
             f"Preprocessor not found at {preprocessor_path}. "
-            "Please train the model first by running: python src/train_model.py"
+            f"Please train the model first by running: {train_hint}"
         )
-    
+
     model = joblib.load(model_path)
     preprocessor = joblib.load(preprocessor_path)
     print("Model and preprocessor loaded successfully!")
@@ -46,40 +55,41 @@ def health():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-    """
-    Predict credit score for a given applicant.
-    
-    Expected JSON payload:
-    {
-        "age": 35,
-        "income": 65000,
-        "employment_length": 5,
-        "loan_amount": 25000,
-        "loan_term": 36,
-        "credit_history_length": 10,
-        "num_credit_lines": 4,
-        "debt_to_income": 0.35,
-        "num_delinquencies": 0,    
-        "num_inquiries": 1
-    }
-    """
+    """Predict credit score for a given applicant."""
     try:
-        # Get request data
-        data = request.get_json()
-        
+        if model is None or preprocessor is None:
+            return jsonify({
+                'error': 'Model not loaded. Train the model and restart the server.',
+                'hint': 'python src/train_model_german.py --dataset synthetic'
+            }), 500
+
+        # Get request data (avoid exceptions on invalid/missing JSON)
+        data = request.get_json(silent=True)
+
+        if data is None:
+            return jsonify({'error': 'Request body must be JSON'}), 400
+        if not isinstance(data, dict):
+            return jsonify({'error': 'JSON payload must be an object'}), 400
+
         # Validate required fields
-        required_fields = [
-            'age', 'income', 'employment_length', 'loan_amount',
-            'loan_term', 'credit_history_length', 'num_credit_lines',
-            'debt_to_income', 'num_delinquencies', 'num_inquiries'
-        ]
-        
-        missing_fields = [field for field in required_fields if field not in data]
+        missing_fields = [field for field in REQUIRED_FIELDS if field not in data]
         if missing_fields:
             return jsonify({
                 'error': f"Missing required fields: {', '.join(missing_fields)}"
             }), 400
-        
+
+        # Validate data types
+        for field in REQUIRED_FIELDS:
+            value = data.get(field)
+            if value is None:
+                return jsonify({'error': f"Field '{field}' cannot be empty/null"}), 400
+            try:
+                float(value)
+            except (ValueError, TypeError):
+                return jsonify({
+                    'error': f"Field '{field}' must be a number, got {type(value).__name__}"
+                }), 400
+
         # Create DataFrame
         input_df = pd.DataFrame([{
             'age': float(data['age']),
@@ -93,19 +103,17 @@ def predict():
             'num_delinquencies': float(data['num_delinquencies']),
             'num_inquiries': float(data['num_inquiries'])
         }])
-        
+
         # Preprocess
         X, _ = preprocessor.prepare_data(input_df, fit_scaler=False)
-        
+
         # Make prediction
         result = model.predict_single(X.iloc[0].to_dict())
-        
+
         return jsonify(result)
-    
+
     except Exception as e:
-        return jsonify({
-            'error': str(e)
-        }), 500
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/feature_importance', methods=['GET'])
 def feature_importance():

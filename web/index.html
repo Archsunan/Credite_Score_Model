@@ -30,8 +30,8 @@
             <p class="subtitle">Advanced Machine Learning Assessment</p>
         </header>
 
-        <main class="glass-panel">
-            <div class="content-grid">
+        <main class="main-content">
+            <div class="glass-panel form-container">
                 <div class="form-section">
                     <div class="section-header">
                         <i class="fa-regular fa-id-card"></i>
@@ -74,8 +74,6 @@
                                         required>
                                 </div>
                             </div>
-
-
 
                             <div class="form-group">
                                 <label for="loan_term">Loan Term</label>
@@ -144,42 +142,42 @@
                         </button>
                     </form>
                 </div>
+            </div>
 
-                <div class="result-section hidden" id="resultSection">
-                    <div class="result-glass-card">
-                        <h2>Analysis Result</h2>
+            <div class="glass-panel result-card hidden" id="resultSection">
+                <div class="result-content">
+                    <h2>Analysis Result</h2>
 
-                        <div class="score-circle-container">
-                            <div class="score-circle" id="scoreCircle">
-                                <span class="score-text" id="scoreValue">--</span>
-                                <span class="score-sub">Score</span>
-                            </div>
-                            <svg class="progress-ring" width="200" height="200">
-                                <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.1)" stroke-width="8"
-                                    fill="transparent" r="90" cx="100" cy="100" />
-                                <circle class="progress-ring__circle" id="progressRing" stroke="white" stroke-width="8"
-                                    fill="transparent" r="90" cx="100" cy="100" />
-                            </svg>
+                    <div class="score-circle-container">
+                        <div class="score-circle" id="scoreCircle">
+                            <span class="score-text" id="scoreValue">--</span>
+                            <span class="score-sub">Score</span>
                         </div>
+                        <svg class="progress-ring" width="200" height="200">
+                            <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.1)" stroke-width="8"
+                                fill="transparent" r="90" cx="100" cy="100" />
+                            <circle class="progress-ring__circle" id="progressRing" stroke="white" stroke-width="8"
+                                fill="transparent" r="90" cx="100" cy="100" />
+                        </svg>
+                    </div>
 
-                        <div class="badge-container">
-                            <div class="status-badge" id="scoreBadge">
-                                <span id="riskLevel">-</span> Risk
-                            </div>
+                    <div class="badge-container">
+                        <div class="status-badge" id="scoreBadge">
+                            <span id="riskLevel">-</span> Risk
                         </div>
+                    </div>
 
-                        <div class="metrics-grid">
-                            <div class="metric-item">
-                                <span class="label">Confidence</span>
-                                <span class="value" id="confidence">-%</span>
-                            </div>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <span class="label">Confidence</span>
+                            <span class="value" id="confidence">-%</span>
                         </div>
+                    </div>
 
-                        <div class="probabilities-wrapper">
-                            <h3>Probability Distribution</h3>
-                            <div class="probability-bars" id="probabilityBars">
-                                <!-- Bars injected by JS -->
-                            </div>
+                    <div class="probabilities-wrapper">
+                        <h3>Probability Distribution</h3>
+                        <div class="probability-bars" id="probabilityBars">
+                            <!-- Bars injected by JS -->
                         </div>
                     </div>
                 </div>
