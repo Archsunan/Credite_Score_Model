@@ -1,18 +1,18 @@
 
-# 🏦 Credit Score Model
+#  Credit Score Model
 
 An AI-powered credit scoring system that predicts creditworthiness using machine learning. Built with XGBoost, Flask, and a modern web interface.
 
-## ✨ Features
+##  Features
 
-- **🤖 Machine Learning Model**: XGBoost-based classification with 78.6% accuracy and 95.1% ROC AUC
-- **📊 Automated Data Processing**: Feature engineering and preprocessing pipeline
-- **🚀 REST API**: Flask-based API with CORS support for predictions
-- **💻 Modern Web Interface**: Responsive UI with real-time predictions
-- **📈 Model Evaluation**: Confusion matrix, feature importance, and comprehensive metrics
-- **🎯 Four Credit Categories**: Excellent, Good, Fair, Poor with probability distributions
+- ** Machine Learning Model**: XGBoost-based classification with 78.6% accuracy and 95.1% ROC AUC
+- ** Automated Data Processing**: Feature engineering and preprocessing pipeline
+- ** REST API**: Flask-based API with CORS support for predictions
+- ** Modern Web Interface**: Responsive UI with real-time predictions
+- ** Model Evaluation**: Confusion matrix, feature importance, and comprehensive metrics
+- ** Four Credit Categories**: Excellent, Good, Fair, Poor with probability distributions
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### 1. Install Dependencies
 ```bash
@@ -42,7 +42,7 @@ API will be available at: **http://localhost:5000**
 ### 4. Open the Web Interface
 Open `web/index.html` in your browser or visit the local file path.
 
-## 📊 Model Performance
+##  Model Performance
 
 - **Accuracy**: 78.6%
 - **Weighted ROC AUC**: 95.1%
@@ -141,7 +141,7 @@ The system automatically generates additional features:
 - Has Delinquencies Flag
 - Many Inquiries Flag
 
-## 🎯 Credit Score Categories
+##  Credit Score Categories
 
 | Category | Risk Level | Description |
 |----------|-----------|-------------|
@@ -150,7 +150,7 @@ The system automatically generates additional features:
 | **Fair** | Moderate | Some concerns, careful evaluation needed |
 | **Poor** | High | High risk, significant credit concerns |
 
-## 📦 Technologies Used
+##  Technologies Used
 
 - **Python 3.13+** - Core programming language
 - **XGBoost 3.1** - Gradient boosting model
@@ -160,7 +160,7 @@ The system automatically generates additional features:
 - **matplotlib & seaborn** - Visualizations
 - **HTML/CSS/JavaScript** - Web interface
 
-## ⚠️ Disclaimer
+##  Disclaimer
 
 This is a **demonstration project** for educational purposes. The model uses synthetic data and should not be used for actual credit decisions. Real-world credit scoring requires:
 - Regulatory compliance (FCRA, ECOA, etc.)
@@ -168,7 +168,7 @@ This is a **demonstration project** for educational purposes. The model uses syn
 - Bias and fairness testing
 - Professional financial analysis
 
-## 🧪 Testing
+##  Testing
 
 ### Test Model Predictions
 ```bash
@@ -179,8 +179,6 @@ python test_model.py
 ```bash
 python test_api_all_categories.py
 ```
-
-## 📝 License
 
 This project is provided as-is for educational purposes.
 
