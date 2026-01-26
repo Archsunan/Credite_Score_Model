@@ -184,4 +184,3 @@ This project is provided as-is for educational purposes.
 
 ---
 
-**Built with ❤️ using XGBoost, Flask, and Modern Web Technologies**
