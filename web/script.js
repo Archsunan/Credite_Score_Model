@@ -1,5 +1,4 @@
 const API_URL = 'http://localhost:5000';
-
 // Form submission handler
 // Form submission handler
 const creditForm = document.getElementById('creditForm');
