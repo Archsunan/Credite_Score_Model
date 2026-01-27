@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis History - CrediSure</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <header>
+            <a href="index.html" class="back-home-btn" title="Back to Home">
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+            <div class="logo-area">
+                <i class="fa-solid fa-clock-rotate-left logo-icon"></i>
+                <h1>History</h1>
+            </div>
+            <p class="subtitle">Past Credit Assessments</p>
+        </header>
+
+        <main class="main-content">
+            <div class="glass-panel" style="width: 100%; max-width: 1000px; padding: 30px;">
+                <div class="history-header">
+                    <h2>Analysis Records</h2>
+                    <button onclick="clearHistory()" class="btn-clear" title="Clear All History"
+                        style="font-size: 1.2rem;">
+                        <span style="font-size: 0.9rem; margin-right: 5px; vertical-align: middle;">Clear All</span>
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+
+                <div id="historyPageList" class="history-page-list">
+                    <!-- Detailed history items injected by JS -->
+                    <div class="empty-history">No analysis history found. Run calculations in the App to see them here.
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 CrediSure. Local Storage History.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

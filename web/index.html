@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credit Score AI</title>
+    <title>CrediSure - AI Credit Assessment</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -22,181 +22,105 @@
     </div>
 
     <div class="app-container">
-        <header>
+        <header class="landing-header">
             <div class="logo-area">
                 <i class="fa-solid fa-chart-line logo-icon"></i>
                 <h1>CrediSure</h1>
             </div>
-            <p class="subtitle">Advanced Machine Learning Assessment</p>
+            <nav class="landing-nav">
+
+                <a href="#how-it-works">How it works</a>
+                <a href="history.html">History</a>
+            </nav>
         </header>
 
-        <main class="main-content">
-            <div class="glass-panel form-container">
-                <div class="form-section">
-                    <div class="section-header">
-                        <i class="fa-regular fa-id-card"></i>
-                        <h2>Applicant Details</h2>
-                    </div>
-                    <form id="creditForm">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="age">Age</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-user input-icon"></i>
-                                    <input type="number" id="age" name="age" min="18" max="100" value="35" required
-                                        placeholder="e.g. 35">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="income">Annual Income ($)</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-sack-dollar input-icon"></i>
-                                    <input type="number" id="income" name="income" min="0" value="65000" required
-                                        placeholder="e.g. 65000">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="employment_length">Employment (years)</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-briefcase input-icon"></i>
-                                    <input type="number" id="employment_length" name="employment_length" min="0"
-                                        step="0.1" value="5" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="loan_amount">Loan Amount ($)</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-hand-holding-dollar input-icon"></i>
-                                    <input type="number" id="loan_amount" name="loan_amount" min="0" value="25000"
-                                        required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="loan_term">Loan Term</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-calendar input-icon"></i>
-                                    <select id="loan_term" name="loan_term" required>
-                                        <option value="12">12 months</option>
-                                        <option value="24">24 months</option>
-                                        <option value="36" selected>36 months</option>
-                                        <option value="48">48 months</option>
-                                        <option value="60">60 months</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="credit_history_length">Credit History (years)</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-clock-rotate-left input-icon"></i>
-                                    <input type="number" id="credit_history_length" name="credit_history_length" min="0"
-                                        step="0.1" value="10" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="num_credit_lines">Active Credit Lines</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-credit-card input-icon"></i>
-                                    <input type="number" id="num_credit_lines" name="num_credit_lines" min="0" value="4"
-                                        required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="debt_to_income">Debt-to-Income Ratio</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-scale-balanced input-icon"></i>
-                                    <input type="number" id="debt_to_income" name="debt_to_income" min="0" max="1"
-                                        step="0.01" value="0.35" required>
-                                </div>
-                                <small>0.0 - 1.0 (e.g. 0.35)</small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="num_delinquencies">Delinquencies</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-triangle-exclamation input-icon"></i>
-                                    <input type="number" id="num_delinquencies" name="num_delinquencies" min="0"
-                                        value="0" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="num_inquiries">Credit Inquiries</label>
-                                <div class="input-wrapper">
-                                    <i class="fa-solid fa-magnifying-glass input-icon"></i>
-                                    <input type="number" id="num_inquiries" name="num_inquiries" min="0" value="1"
-                                        required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn-primary">
-                            <span>Analyze Profile</span>
+        <main class="landing-main">
+            <section class="hero-section">
+                <div class="hero-content glass-panel">
+                    <h2>Future of Credit Assessment</h2>
+                    <p class="hero-subtitle">
+                        Leverage the power of Advanced Machine Learning to predict creditworthiness with
+                        unprecedented accuracy. Instant, secure, and reliable.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="app.html" class="btn-primary btn-large">
+                            <span>Check Your Score</span>
                             <i class="fa-solid fa-arrow-right"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
+                        </a>
 
-            <div class="glass-panel result-card hidden" id="resultSection">
-                <div class="result-content">
-                    <h2>Analysis Result</h2>
-
-                    <div class="score-circle-container">
-                        <div class="score-circle" id="scoreCircle">
-                            <span class="score-text" id="scoreValue">--</span>
-                            <span class="score-sub">Score</span>
-                        </div>
-                        <svg class="progress-ring" width="200" height="200">
-                            <circle class="progress-ring__circle-bg" stroke="rgba(255,255,255,0.1)" stroke-width="8"
-                                fill="transparent" r="90" cx="100" cy="100" />
-                            <circle class="progress-ring__circle" id="progressRing" stroke="white" stroke-width="8"
-                                fill="transparent" r="90" cx="100" cy="100" />
-                        </svg>
-                    </div>
-
-                    <div class="badge-container">
-                        <div class="status-badge" id="scoreBadge">
-                            <span id="riskLevel">-</span> Risk
-                        </div>
-                    </div>
-
-                    <div class="metrics-grid">
-                        <div class="metric-item">
-                            <span class="label">Confidence</span>
-                            <span class="value" id="confidence">-%</span>
-                        </div>
-                    </div>
-
-                    <div class="probabilities-wrapper">
-                        <h3>Probability Distribution</h3>
-                        <div class="probability-bars" id="probabilityBars">
-                            <!-- Bars injected by JS -->
-                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <section id="how-it-works" class="how-it-works-section">
+                <div class="section-title">
+                    <h2>How it works</h2>
+                    <p>Three simple steps to your credit assessment</p>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step-card glass-panel">
+                        <div class="step-number">1</div>
+                        <h3>Enter Details</h3>
+                        <p>Fill in your financial information including income, loan amount, and history.</p>
+                    </div>
+                    <div class="step-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="step-card glass-panel">
+                        <div class="step-number">2</div>
+                        <h3>AI Analysis</h3>
+                        <p>Our advanced XGBoost model processes your data against thousands of profiles.</p>
+                    </div>
+                    <div class="step-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                    <div class="step-card glass-panel">
+                        <div class="step-number">3</div>
+                        <h3>Get Score</h3>
+                        <p>Receive your credit score, risk assessment, and detailed insights instantly.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="features" class="features-section">
+                <div class="section-title">
+                    <h2>Key Features</h2>
+                    <p>Why innovative lenders choose CrediSure</p>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card glass-panel">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3>AI-Powered</h3>
+                        <p>Built on XGBoost technology, trained on thousands of data points for maximum precision.</p>
+                    </div>
+
+                    <div class="feature-card glass-panel">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
+                        <h3>Instant Results</h3>
+                        <p>Get your credit risk analysis in milliseconds. No waiting periods, just real-time data.</p>
+                    </div>
+
+                    <div class="feature-card glass-panel">
+                        <div class="icon-box">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h3>Secure & Private</h3>
+                        <p>Your financial data is processed securely. We prioritize privacy and data protection.</p>
+                    </div>
+                </div>
+            </section>
         </main>
 
         <footer>
-            <p>For educational purposes only • Powered by XGBoost</p>
+            <p>&copy; 2026 CrediSure. For educational purposes only.</p>
         </footer>
     </div>
-
-    <div class="loading-overlay" id="loadingOverlay">
-        <div class="loader-content">
-            <div class="spinner"></div>
-            <p>Analyzing Financial Data...</p>
-        </div>
-    </div>
-
-    <script src="script.js"></script>
 </body>
 
 </html>
