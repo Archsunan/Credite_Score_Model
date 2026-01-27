@@ -441,6 +441,54 @@ async function loadFeatureImportance() {
     }
 }
 
+async function loadFeatureImportance() {
+    const wrapper = document.getElementById('featureImportanceWrapper');
+    const barsContainer = document.getElementById('featureImportanceBars');
+
+    try {
+        const response = await fetch(`${API_URL}/feature_importance`);
+        if (!response.ok) return;
+
+        const data = await response.json();
+        const features = data.features; // Array of {feature: 'name', importance: 0.123}
+
+        // Sort by importance desc and take top 5
+        features.sort((a, b) => b.importance - a.importance);
+        const topFeatures = features.slice(0, 5);
+        const maxImportance = topFeatures[0].importance;
+
+        barsContainer.innerHTML = '';
+
+        topFeatures.forEach(item => {
+            // Normalize width relative to the top feature
+            const percentage = (item.importance / maxImportance) * 100;
+            // Clean up feature name (e.g. "debt_to_income" -> "Debt to Income")
+            const displayName = item.feature
+                .split('_')
+                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ');
+
+            const barHtml = `
+                <div class="probability-bar">
+                    <div class="probability-label">
+                        <span>${displayName}</span>
+                        <span>${(item.importance * 100).toFixed(1)}%</span>
+                    </div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: ${percentage}%; background-color: #a855f7; box-shadow: 0 0 10px #a855f780;"></div>
+                    </div>
+                </div>
+            `;
+            barsContainer.innerHTML += barHtml;
+        });
+
+        wrapper.classList.remove('hidden');
+
+    } catch (e) {
+        console.error("Failed to load feature importance", e);
+    }
+}
+
 // Check API health on page load
 window.addEventListener('load', async () => {
     if (document.getElementById('historyPageList')) {
