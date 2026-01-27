@@ -16,10 +16,9 @@
 
 <body>
     <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
     </div>
+
+
 
     <div class="app-container">
         <header>
@@ -34,26 +33,26 @@
         </header>
 
         <main class="main-content">
-            <div class="glass-panel" style="width: 100%; max-width: 1000px; padding: 30px;">
-                <div class="history-header">
-                    <h2>Analysis Records</h2>
-                    <button onclick="clearHistory()" class="btn-clear" title="Clear All History"
-                        style="font-size: 1.2rem;">
-                        <span style="font-size: 0.9rem; margin-right: 5px; vertical-align: middle;">Clear All</span>
+            <div class="glass-panel" style="width: 100%; max-width: 900px; margin: 0 auto; padding: 0;">
+                <div class="history-header" style="padding: 32px 40px; margin: 0;">
+                    <h2 style="font-size: 1.5rem; font-weight: 600;">Analysis Records</h2>
+                    <button onclick="clearHistory()" class="btn-clear" title="Clear All History">
+                        <span style="font-size: 0.9rem; margin-right: 8px;">Clear All</span>
                         <i class="fa-solid fa-trash"></i>
                     </button>
                 </div>
 
-                <div id="historyPageList" class="history-page-list">
+                <div id="historyPageList" class="history-page-list" style="padding: 0 40px 40px;">
                     <!-- Detailed history items injected by JS -->
-                    <div class="empty-history">No analysis history found. Run calculations in the App to see them here.
+                    <div class="empty-history" style="text-align: center; color: var(--text-muted); padding: 40px;">
+                        No analysis history found. Run calculations in the App to see them here.
                     </div>
                 </div>
             </div>
         </main>
 
         <footer>
-            <p>&copy; 2026 CrediSure. Local Storage History.</p>
+            <p>&copy; 2026 CrediSure. Local Storage Histo.</p>
         </footer>
     </div>
 

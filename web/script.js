@@ -65,10 +65,10 @@ function displayResults(result) {
     // Radius = 90, Circumference = 2 * PI * 90 ≈ 565.48
     const circumference = 565.48;
     const colors = {
-        'Excellent': '#10b981', // green
-        'Good': '#5383d0ff',      // blue
-        'Fair': '#f59e0b',      // amber
-        'Poor': '#ef4444'       // red
+        'Excellent': '#16a34a', // Green
+        'Good': '#2563eb',      // Blue
+        'Fair': '#d97706',      // Brown/Amber (as requested)
+        'Poor': '#dc2626'       // Red
     };
 
     const color = colors[result.credit_score] || '#ffffff';
@@ -269,7 +269,7 @@ function downloadResultAsPDF(result) {
 
 // Helper to generates bars for the PDF
 function generateProbabilityBarsHtml(probabilities) {
-    const colors = { 'Excellent': '#10b981', 'Good': '#5383d0', 'Fair': '#f59e0b', 'Poor': '#ef4444' };
+    const colors = { 'Excellent': '#16a34a', 'Good': '#2563eb', 'Fair': '#d97706', 'Poor': '#dc2626' };
     const categories = ['Excellent', 'Good', 'Fair', 'Poor'];
 
     let html = '';
@@ -292,7 +292,7 @@ function generateProbabilityBarsHtml(probabilities) {
 }
 
 function getScoreColor(score) {
-    const colors = { 'Excellent': '#10b981', 'Good': '#5383d0', 'Fair': '#f59e0b', 'Poor': '#ef4444' };
+    const colors = { 'Excellent': '#16a34a', 'Good': '#2563eb', 'Fair': '#d97706', 'Poor': '#dc2626' };
     return colors[score] || '#000';
 }
 
@@ -357,9 +357,14 @@ function loadHistoryPage() {
                         ${item.score} (${item.probability}%)
                     </div>
                 </div>
-                <button class="btn-toggle" onclick="toggleDetails(${item.id})">
-                    View Details <i class="fa-solid fa-chevron-down"></i>
-                </button>
+                <div class="history-actions">
+                    <button class="btn-toggle" onclick="toggleDetails(${item.id})">
+                        View Details <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <button class="btn-delete-item" onclick="deleteHistoryItem(${item.id})" title="Delete this record">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
             </div>
             
             <div id="details-${item.id}" class="history-details-grid hidden">
@@ -383,6 +388,15 @@ function toggleDetails(id) {
     const details = document.getElementById(`details-${id}`);
     if (details) {
         details.classList.toggle('hidden');
+    }
+}
+
+function deleteHistoryItem(id) {
+    if (confirm('Are you sure you want to delete this record?')) {
+        let history = JSON.parse(localStorage.getItem('creditHistory') || '[]');
+        history = history.filter(item => item.id !== id);
+        localStorage.setItem('creditHistory', JSON.stringify(history));
+        loadHistoryPage();
     }
 }
 
@@ -506,5 +520,7 @@ window.addEventListener('load', async () => {
         console.warn('Could not connect to API server. Make sure to run: python src/api.py');
     }
 });
+
+
 
 

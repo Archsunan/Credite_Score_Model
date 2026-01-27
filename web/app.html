@@ -17,20 +17,18 @@
 
 <body>
     <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
     </div>
+
+
 
     <div class="app-container">
         <header>
-            <a href="index.html" class="back-home-btn" title="Back to Home">
-                <i class="fa-solid fa-arrow-left"></i>
-            </a>
             <div class="logo-area">
-                <i class="fa-solid fa-chart-line logo-icon"></i>
                 <h1>CrediSure</h1>
             </div>
+            <a href="index.html" class="back-home-btn" title="Back to Home">
+                &larr;
+            </a>
             <p class="subtitle">Advanced Machine Learning Assessment</p>
         </header>
 
@@ -38,7 +36,6 @@
             <div class="glass-panel form-container">
                 <div class="form-section">
                     <div class="section-header">
-                        <i class="fa-regular fa-id-card"></i>
                         <h2>Applicant Details</h2>
                     </div>
                     <form id="creditForm">
@@ -46,7 +43,6 @@
                             <div class="form-group">
                                 <label for="age">Age</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-user input-icon"></i>
                                     <input type="number" id="age" name="age" min="18" max="100" value="35" required
                                         placeholder="e.g. 35">
                                 </div>
@@ -55,7 +51,6 @@
                             <div class="form-group">
                                 <label for="income">Annual Income ($)</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-sack-dollar input-icon"></i>
                                     <input type="number" id="income" name="income" min="0" value="65000" required
                                         placeholder="e.g. 65000">
                                 </div>
@@ -64,7 +59,6 @@
                             <div class="form-group">
                                 <label for="employment_length">Employment (years)</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-briefcase input-icon"></i>
                                     <input type="number" id="employment_length" name="employment_length" min="0"
                                         step="0.1" value="5" required>
                                 </div>
@@ -73,7 +67,6 @@
                             <div class="form-group">
                                 <label for="loan_amount">Loan Amount ($)</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-hand-holding-dollar input-icon"></i>
                                     <input type="number" id="loan_amount" name="loan_amount" min="0" value="25000"
                                         required>
                                 </div>
@@ -82,7 +75,6 @@
                             <div class="form-group">
                                 <label for="loan_term">Loan Term</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-calendar input-icon"></i>
                                     <select id="loan_term" name="loan_term" required>
                                         <option value="12">12 months</option>
                                         <option value="24">24 months</option>
@@ -96,7 +88,6 @@
                             <div class="form-group">
                                 <label for="credit_history_length">Credit History (years)</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-clock-rotate-left input-icon"></i>
                                     <input type="number" id="credit_history_length" name="credit_history_length" min="0"
                                         step="0.1" value="10" required>
                                 </div>
@@ -105,7 +96,6 @@
                             <div class="form-group">
                                 <label for="num_credit_lines">Active Credit Lines</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-credit-card input-icon"></i>
                                     <input type="number" id="num_credit_lines" name="num_credit_lines" min="0" value="4"
                                         required>
                                 </div>
@@ -114,7 +104,6 @@
                             <div class="form-group">
                                 <label for="debt_to_income">Debt-to-Income Ratio</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-scale-balanced input-icon"></i>
                                     <input type="number" id="debt_to_income" name="debt_to_income" min="0" max="1"
                                         step="0.01" value="0.35" required>
                                 </div>
@@ -124,7 +113,6 @@
                             <div class="form-group">
                                 <label for="num_delinquencies">Delinquencies</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-triangle-exclamation input-icon"></i>
                                     <input type="number" id="num_delinquencies" name="num_delinquencies" min="0"
                                         value="0" required>
                                 </div>
@@ -133,7 +121,6 @@
                             <div class="form-group">
                                 <label for="num_inquiries">Credit Inquiries</label>
                                 <div class="input-wrapper">
-                                    <i class="fa-solid fa-magnifying-glass input-icon"></i>
                                     <input type="number" id="num_inquiries" name="num_inquiries" min="0" value="1"
                                         required>
                                 </div>
@@ -142,7 +129,6 @@
 
                         <button type="submit" class="btn-primary">
                             <span>Analyze Profile</span>
-                            <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </form>
                 </div>
