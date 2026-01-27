@@ -65,7 +65,7 @@ credit_score/
 └── models/                    # Saved model files (created after training)
 ```
 
-## 🔌 API Endpoints
+##  API Endpoints
 
 ### Health Check
 ```
